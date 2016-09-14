@@ -1,0 +1,19 @@
+<article class="projects col-md-12">
+  <section class="row list-projects-wrapper">
+    <div class="projects-grid-wrapper"
+      [class.col-md-12]="!isGridView"
+      [class.center.col-md-8]="isGridView"
+    >
+      <div class="row">
+        <template ngFor let-project [ngForOf]="projects" let-i="index">
+            <project-item [project]="project"
+                               [class.col-md-3]="!isGridView"
+                               [class.col-md-12]="isGridView"
+            ></project-item>
+            <div *ngIf="(i+1) % 4 == 0" class="clearfix"></div>
+        </template>
+      </div>
+    </div>
+  </section>
+</article>
+

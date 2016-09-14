@@ -1,0 +1,106 @@
+project-form {
+  .pb-project-form {
+
+    min-height: 300px;
+
+    .pb-title {
+      word-break: break-word;
+      padding-bottom: 13px;
+      border-bottom: 2px solid #eee;
+
+      >input {
+        text-align: center;
+        margin: 12px 0 1px;
+      }
+
+      .btn {
+        padding: 0 1px;
+      }
+    }
+    .wrap-edit-btn,
+    .checkbox {
+      margin: 20px 0;
+    }
+
+    .pb-name-control {
+      height: 56px;
+      font-size: 36px;
+      color: inherit;
+    }
+
+    .pb-description-control {
+      font-size: 21px;
+      font-weight: 200;
+      line-height: 1.4;
+      min-height: 70px;
+
+      >pre {
+        padding: 6px 11px;
+        background: none;
+        border: none;
+        font-family: inherit;
+        font-size: 21px;
+        margin-bottom: 16px;
+        white-space: pre-wrap;
+      }
+
+      >textarea {
+        padding: 6px 10px;
+        color: #333;
+        font-size: 21px;
+        width: 100%;
+        overflow: hidden;
+      }
+    }
+
+    .checkbox .quick .toggle-group { transition: none; -webkit-transition: none; }
+
+    .pb-cash-control {
+
+      padding: 0;
+
+      p {
+        padding: 0 0 1px 11px;
+        margin: 0;
+      }
+
+      input {
+        height: 100%;
+        font-size: 21px;
+        padding: 0 10px;
+        font-weight: 200;
+        line-height: 1.4;
+        color: #333;
+        min-width: 120px;
+      }
+
+      input[type=number]::-webkit-inner-spin-button,
+      input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+      }
+    }
+
+    input[inputresize]{
+      transition: width 0.3s;
+    }
+
+    .tags {
+      padding-left: 11px;
+
+      &.tag-edit {
+        padding-left: 12px;
+      }
+
+      .tag {
+        text-align: left;
+        height: 20px;
+        padding: 2px 5px;
+        width: 70px;
+      }
+
+    }
+  }
+}

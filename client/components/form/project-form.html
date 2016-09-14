@@ -1,0 +1,59 @@
+<!-- Edit project-->
+<div *ngIf="project" class="panel panel-default container pb-project-form">
+    <form  #projectForm="ngForm">
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-md-offset-2 col-md-8 text-center pb-title" [class.has-error]="!(name.valid || name.pristine)">
+                    <input required #name="ngModel" class="form-control pb-name-control" [(ngModel)]="project.name" name="name" placeholder="Введите название проекта">
+                    <span [class.hidden.has-error]="name.valid || name.pristine" class="help-block">Укажите название проекта</span>
+                </div>
+                <div class="checkbox col-md-2 col-sm-3 col-xs-4">
+                    <input type="checkbox" input-toggle data-style="quick" data-width="100%" data-on="Личный" data-off="Публичный" name="is_private" [(ngModel)]="project.is_private">
+                </div>
+            </div>
+            <div class="row">
+                <p class="text-muted">Описание:</p>
+                <div class="form-group pb-description-control">
+                    <textarea textarearesize name="description" [(ngModel)]="project.description">{{project.description}}</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <p class="text-muted">Годовой оборот через 4 года (в долларах США):</p>
+                <div class="form-group pb-cash-control col-md-3" [class.has-error]="!cash.valid">
+                    <input type="text" required inputresize class="form-control" value="{{cashStr | currency:'USD':true:'.0-9' }}"  (keyup)="cashStr=$event.target.value">
+                    <input style="display: none" type="number" required #cash="ngModel" [ngModel]="project.cash" name="cash">
+                </div>
+            </div>
+            <div class="row">
+                <p class="text-muted">Теги:</p>
+                <ul class="list-inline tags tag-edit">
+                <li *ngFor="let tag of project.tags let i=index">
+                    <input type="text" class="form-control tag tag-edit"
+                        #tagEl inputresize
+                        (blur)="editTag(tagEl, i)"
+                        value="#{{tag}}">
+                </li>
+                <li>
+                    <input type="text" class="form-control tag tag-edit tag-new js-tag-new"
+                        #tagEl inputresize
+                        (blur)="editTag(tagEl)"
+                        (keydown)="!($event.code.indexOf('Enter') > -1) || editTag(tagEl)"
+                        value="">
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-10 col-md-2">
+                    <button type="button" class="btn btn-primary pull-right"
+                            (click)="save()"
+                            [disabled]="!projectForm.form.valid">
+                        <span>
+                            <i class="glyphicon glyphicon-save"></i>
+                            Сохранить
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
