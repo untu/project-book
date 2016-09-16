@@ -1,23 +1,30 @@
 Project Book
 
-Project Book это коллекция гениальных идей созданная людьми желающими улучшить мир.
-Именно на этой площадке инвесторы могут приумножить свой капитал проинвестировав в перспективный проект.
+  Project Book is the SW tool to make peoples ideas collection open and clear.
 
-Сайт проекта project-book.rossinno.net
+The Project Book could be used as:
+- a tool for innovation inside a company;
+- a tool for customers to company/community communication channel for features/products reinnovation;
+- as a social network for projects/ideas share, rate, verify, comment, follow and join.
 
-Project Book разрабатывается с использованием передовых технологий Angular2 и MeteorJS на языке TypeScript.
-Проект с открытым кодом, чтоб каждый мог подчерпнуть для себя что-то новое.
-Будем рады помощь в разработке и развитии проекта.
+The Project Book already working on http://project-book.rossinno.net which is started as an alpha version of Social Network of The Projects. There's a plan to implement business model canvas, ROI and other tools to verify an idea.
 
-Установка
-$ git clone ... project_folder
-$ cd project_folder
-$ npm i
+The Project Book is build with latest aproach of Angular2 & MeteorJS on TypeScript lang.
+That's Open Source for noncommertial/internal use & should be purchased for a business.
+Everybody is welcome to join for the contribution.
 
-Конфигурация социальных сервисов
-$ cd project_folder
-$ cp server/configuration.example.ts server/configuration.ts
-$ nano server/configuration.ts
+Intalling:
 
-Запуск
-$ meteor
+  $ git clone ... project_folder
+  $ cd project_folder
+  $ npm i
+
+Social networking interconnection configuration:
+
+  $ cd project_folder
+  $ cp server/configuration.example.ts server/configuration.ts
+  $ nano server/configuration.ts
+
+Server side start procedure: 
+
+  $ meteor
