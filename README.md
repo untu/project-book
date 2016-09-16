@@ -12,19 +12,3 @@ The Project Book already working on http://project-book.rossinno.net which is st
 The Project Book is build with latest aproach of Angular2 & MeteorJS on TypeScript lang.
 That's Open Source for noncommertial/internal use & should be purchased for a business.
 Everybody is welcome to join for the contribution.
-
-Intalling:
-
-  $ git clone ... project_folder
-  $ cd project_folder
-  $ npm i
-
-Social networking interconnection configuration:
-
-  $ cd project_folder
-  $ cp server/configuration.example.ts server/configuration.ts
-  $ nano server/configuration.ts
-
-Server side start procedure: 
-
-  $ meteor
