@@ -1,0 +1,24 @@
+rating {
+  .star-rating__ico {
+    float: right;
+    padding-left: 2px;
+    cursor: pointer;
+    color: white;
+
+    &.active:hover {
+      color: #e91e63;
+    }
+  }
+  .star-rating__ico:last-child{
+    padding-left: 0;
+  }
+  .my-choice {
+    color:#64B5F6;
+  }
+  .active.star-rating__ico:hover:before,
+  .active.star-rating__ico:hover ~ .star-rating__ico:before,
+  .star-rating__input:checked ~ .star-rating__ico:before
+  {
+    content: "\f005";
+  }
+}

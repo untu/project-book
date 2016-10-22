@@ -1,6 +1,6 @@
 Project Book
 
-  Project Book is the SW tool to make peoples ideas collection open and clear.
+Project Book is the SW tool to make peoples ideas collection open and clear.
 
 The Project Book could be used as:
 - a tool for innovation inside a company;

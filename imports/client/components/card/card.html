@@ -1,0 +1,104 @@
+<div *ngIf="viewMode" class="panel panel-default container">
+    <div [ngSwitch]="viewMode " class="panel-body">
+
+        <span *ngSwitchCase="ViewMode.LOADING">
+            <div class="row">
+                <div class="col-md-1">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </span>
+
+        <span *ngSwitchCase="ViewMode.DENY">
+            <div class="row">
+                <div class="form-group col-md-offset-2 col-md-8 text-center pb-title">
+                    <h1>Доступ запрещен</h1>
+                </div>
+            </div>
+        </span>
+
+        <span *ngSwitchCase="ViewMode.BRIEF">
+            <div class="row">
+                <div class="col-md-12">
+                    <rating class="pull-left" [project]="project"></rating>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-offset-2 col-md-8 text-center pb-title">
+                    <h1>{{project.name}}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <p class="text-muted">Описание:</p>
+                <div class="form-group pb-description-control">
+                    <pre>{{description}}</pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="alert alert-warning text-center blink" role="alert">
+                    <p>Авторизуйтесь для полного доступа</p>
+                </div>
+            </div>
+            <div class="row" *ngIf="project.tags.length > 0">
+                <p class="text-muted">Теги:</p>
+                <ul class="list-inline tags">
+                    <li *ngFor="let tag of project.tags let i=index">
+                        <a class="tag" [routerLink]="['/search', '%23' + tag]">#{{tag}}</a>
+                    </li>
+                </ul>
+            </div>
+        </span>
+
+        <span *ngSwitchCase="ViewMode.FULL">
+            <div class="row">
+                <div class="col-md-12">
+                    <rating class="pull-left" [project]="project" [userId]="user._id" [active]="true"></rating>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-offset-2 col-md-8 text-center pb-title">
+                    <h1>{{project.name}}</h1>
+                </div>
+                <div class="checkbox col-md-2 col-sm-3 col-xs-4">
+                    <input disabled data-style="quick" type="checkbox" input-toggle data-width="100%" data-on="Личный"
+                           data-off="Публичный" name="is_private" [(ngModel)]="project.is_private">
+                </div>
+            </div>
+            <div class="row">
+                <p class="text-muted">Описание:</p>
+                <div class="form-group pb-description-control">
+                    <pre>{{description}}</pre>
+                </div>
+            </div>
+            <div class="row">
+                <p class="text-muted">Годовой оборот через 4 года (в долларах США):</p>
+                <div class="col-md-10">
+                    <div class="form-group pb-cash-control col-md-3">
+                        <p class="lead">{{project.cash | currency:'USD':true:'.0-9' }}</p>
+                    </div>
+                </div>
+                <div class="wrap-edit-btn col-md-2">
+                    <button type="button" class="btn btn-primary"
+                            (click)="router.navigate(['project/edit/', project._id])"
+                            *ngIf="hasEdit"
+                    >
+                        <i class="glyphicon glyphicon-edit"></i>
+                        Редактировать
+                    </button>
+                </div>
+            </div>
+            <div class="row" *ngIf="project.tags.length > 0">
+                <p class="text-muted">Теги:</p>
+                <ul class="list-inline tags">
+                    <li *ngFor="let tag of project.tags let i=index">
+                        <a class="tag" [routerLink]="['/search', '%23' + tag]">#{{tag}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <p class="text-muted">Комментарии:</p>
+                <fb-comments class="col-md-12"></fb-comments>
+            </div>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+project-card {
+  min-height: 300px;
+
+  .pb-title {
+    word-break: break-word;
+    padding-bottom: 13px;
+    border-bottom: 2px solid #eee;
+
+    .btn {
+      padding: 0 1px;
+    }
+  }
+  .wrap-edit-btn,
+  .checkbox {
+    margin: 20px 0;
+  }
+
+  .pb-name-control {
+    height: 56px;
+    font-size: 36px;
+    color: inherit;
+  }
+
+  .pb-description-control {
+    font-size: 21px;
+    font-weight: 200;
+    line-height: 1.4;
+    min-height: 70px;
+
+    > pre {
+      padding: 6px 11px;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 21px;
+      margin-bottom: 16px;
+      white-space: pre-wrap;
+    }
+  }
+
+  .checkbox .quick .toggle-group {
+    transition: none;
+    -webkit-transition: none;
+  }
+
+  .pb-cash-control {
+
+    padding: 0;
+
+    p {
+      padding: 0 0 1px 11px;
+      margin: 0;
+    }
+  }
+
+  .tags {
+    padding-left: 11px;
+
+    .tag {
+      text-align: left;
+      height: 20px;
+      padding: 2px 5px;
+      width: 70px;
+    }
+  }
+
+  rating {
+    .star-rating__ico {
+      color: #64B5F6;
+    }
+
+    .my-choice {
+      color: #F06292;
+    }
+  }
+}
+
+.blink {
+  animation: blinker 1s linear 1;
+}
+
+@keyframes blinker {
+  50% { opacity: 0.0; }
+}

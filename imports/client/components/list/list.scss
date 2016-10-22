@@ -1,0 +1,38 @@
+project-list {
+  .project .panel {
+
+    &:hover {
+      box-shadow: 0 0 10px rgba(66, 139, 202, 0.54);
+    }
+
+    .panel-heading {
+
+      .project-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .user-logo {
+        float: right;
+
+        img {
+          width: 30px;
+        }
+      }
+    }
+
+    .description {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      max-height: 5.7142em;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+    }
+
+    .panel-footer {
+      background: none;
+    }
+  }
+}

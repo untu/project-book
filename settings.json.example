@@ -1,0 +1,12 @@
+{
+  "oauth": {
+    "facebook": {
+      "appId": "replace_it",
+      "secret": "replace_it"
+    },
+    "google": {
+      "clientId": "replace_it",
+      "secret": "replace_it"
+    }
+  }
+}
