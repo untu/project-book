@@ -12,3 +12,5 @@ The Project Book already working on http://project-book.rossinno.net which is st
 The Project Book is build with latest aproach of Angular2 & MeteorJS on TypeScript lang.
 That's Open Source for noncommertial/internal use & should be purchased for a business.
 Everybody is welcome to join for the contribution.
+
+For quick start, please, see [wiki](https://github.com/untu/project-book/wiki).
