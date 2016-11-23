@@ -28,17 +28,6 @@ export class AppComponent {
   ngOnInit() {
     this.user$.subscribe(user => this.user = user);
 
-    this.projectService.currentProject$
-      .combineLatest(
-        this.user$,
-        (project, user) => {
-          if (!user && project) {
-
-          }
-        }
-      )
-      .subscribe();
-
     MeteorObservable.subscribe('tags').subscribe();
     this.popularTags$ = this.popularTags();
   }

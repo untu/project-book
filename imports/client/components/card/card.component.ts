@@ -35,20 +35,20 @@ export class CardComponent extends AbstractComponent {
 
   ngOnInit() {
     let sub = this.route.params
-      .switchMap(params => this.projectService.getById(params['id']).zone())
-      .do(project => this.projectService.currentProject = this.project = project)
-      .combineLatest(this.userService.currentUser$,
-        (project: Project, user: User) => {
-          this.viewMode = !project ? ViewMode.DENY : !user ? ViewMode.BRIEF : ViewMode.FULL;
-          this.hasEdit = !!user && user.hasAccess(project);
-          this.user = user;
-          this.description = this.makeDescription(project.description, !user);
-        })
-      .subscribe();
+      .switchMap(params => this.projectService.getById(params['id']).startWith(null))
+      .combineLatest(this.userService.currentUser$, (project: Project, user: User) => {
+        this.viewMode = !project ? ViewMode.DENY : !user ? ViewMode.BRIEF : ViewMode.FULL;
 
-    setTimeout(()=> { // If project not found getById silent.
-      this.viewMode == ViewMode.LOADING && (this.viewMode = ViewMode.DENY);
-    }, 3000);
+        this.project = project;
+        this.user = user;
+
+        if (!project) return;
+
+        this.hasEdit = !!user && user.hasAccess(project);
+        this.description = this.makeDescription(project.description, !user);
+      })
+      .zone()
+      .subscribe();
 
     this.sub(sub);
   }

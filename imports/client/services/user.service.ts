@@ -6,12 +6,20 @@ import * as _ from "lodash";
 
 @Injectable()
 export class UserService {
-    currentUser$: Observable <User | null> = MeteorObservable.autorun()
-        .map(()=> Meteor.user())
-        .filter( user => !_.isUndefined(user))
-        .zone();
+  currentUser$: ReplaySubject <User | null> = new ReplaySubject(1);
 
-    constructor() {
-        MeteorObservable.subscribe('users').subscribe()
-    }
+  constructor() {
+    MeteorObservable.subscribe('users').subscribe();
+
+    MeteorObservable.autorun()
+      .subscribe(() => {
+        const user = Meteor.user();
+
+        if (_.isUndefined(user)) {
+          return;
+        }
+
+        this.currentUser$.next(user);
+      });
+  }
 }
