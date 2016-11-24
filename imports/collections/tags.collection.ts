@@ -1,6 +1,6 @@
 import {User} from "./users.collection";
 import {Observable} from "rxjs";
-import {MongoObservable} from 'meteor-rxjs';
+import {MongoObservable} from "meteor-rxjs";
 
 export interface Tag {
   _id?: string;
@@ -10,11 +10,11 @@ export interface Tag {
 
 class TagsCollection extends MongoObservable.Collection <Tag> {
   inc(tag: string, inc: number = 1): Observable<number> {
-    return this.update({key: tag}, {$inc: {count: inc}}, {upsert: true});
+    return this.upsert({key: tag}, {$inc: {count: inc}});
   }
 }
 
-export var Tags = new TagsCollection('tags');
+export let Tags = new TagsCollection('tags');
 
 Tags.allow({
   insert: function () {

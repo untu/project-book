@@ -1,10 +1,9 @@
-import {ObservableCursor} from "meteor-rxjs";
+import {ObservableCursor, MongoObservable} from "meteor-rxjs";
 import * as _ from "lodash";
 import {Observable} from "rxjs";
 import {Tags} from "./tags.collection";
 import {Users, User} from "./users.collection";
 import Cursor = Mongo.Cursor;
-import {MongoObservable} from 'meteor-rxjs';
 
 export interface ProjectsFilter {
   text: string
@@ -108,13 +107,13 @@ class ProjectCollection extends MongoObservable.Collection <Project> {
   }
 
   save(project: Project): Observable<string> {
-    var id = project._id;
+    let id = project._id;
 
     if (!id) {
       return this.insert(project);
     }
     else {
-      var update = _.omit(project, '_id');
+      let update = _.omit(project, '_id');
       this.update({_id: id}, {$set: update});
       return Observable.of(id);
     }
@@ -127,7 +126,7 @@ Projects.collection.attachSchema(ProjectSchema);
 
 // Helpers
 Projects.collection.helpers({
-  owner: function (project: Project): Observable<User> {
+  owner: function (): Observable<User> {
     return Users.find({_id: this.owner_id})
       .map(_.first)
   },
@@ -137,7 +136,7 @@ Projects.collection.helpers({
     this.rating.count = 0;
     let valSum = 0;
 
-    _.each(this.rating.list, (val: number, x) => {
+    _.each(this.rating.list, (val: number) => {
       this.rating.count++;
       valSum += val;
     });
@@ -149,23 +148,25 @@ Projects.collection.helpers({
 });
 
 // Hooks.
-Projects.collection.before.insert((userId, project: Project) => {
-  _.each(project.tags, (tag) => Tags.inc(tag));
-});
+if (Meteor.isServer) {
+  Projects.collection.before.insert((userId, project: Project) => {
+    _.each(project.tags, (tag) => Tags.inc(tag));
+  });
 
-Projects.collection.before.update((userId, project: Project, fieldNames, modifier: Project, options) => {
-  if (modifier['$set'] && modifier['$set'].tags) {
-    let newTags = modifier['$set'].tags;
-    var added = _.difference(newTags, project.tags);
-    _.each(added, (tag) => Tags.inc(tag));
-    var removed = _.difference(project.tags, newTags);
-    _.each(removed, (tag) => Tags.inc(tag, -1));
-  }
-});
+  Projects.collection.before.update((userId, project: Project, fieldNames, modifier: Project) => {
+    if (modifier['$set'] && modifier['$set'].tags) {
+      let newTags = modifier['$set'].tags;
+      let added = _.difference(newTags, project.tags);
+      _.each(added, (tag) => Tags.inc(tag));
+      let removed = _.difference(project.tags, newTags);
+      _.each(removed, (tag) => Tags.inc(tag, -1));
+    }
+  });
 
-Projects.collection.before.remove((userId, project: Project) => {
-  _.each(project.tags, (tag) => Tags.inc(tag, -1));
-});
+  Projects.collection.before.remove((userId, project: Project) => {
+    _.each(project.tags, (tag) => Tags.inc(tag, -1));
+  });
+}
 
 // Permissions.
 Projects.allow({
