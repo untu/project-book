@@ -1,22 +1,29 @@
-import {Component, ElementRef} from "@angular/core"
+import {Component, ElementRef, OnInit} from "@angular/core";
 
-declare var FB;
+declare let FB;
 
 @Component({
-    selector: 'fb-comments',
-    template: `<div class="fb-comments" [attr.data-href]="href" data-width="100%" data-numposts="5"></div>`
+  selector: 'fb-comments',
+  template: `
+    <div *ngIf="!fbLoaded" style="position: absolute; margin: 10px 10px" class="loader"></div>
+    <div [hidden]="!fbLoaded" class="fb-comments" [attr.data-href]="href" data-width="100%" data-numposts="5"></div>
+    `
 })
-export class FbCommentsComponent {
-    constructor(
-        private el: ElementRef
-    ){}
+export class FbCommentsComponent implements OnInit {
+  private fbLoaded: Boolean = false;
 
-    ngOnInit(){
-        FB.XFBML.parse(this.el.nativeElement)
-    }
+  constructor(private el: ElementRef) {
+  }
 
-    private get href() {
-        return location.href;
-    }
+  ngOnInit() {
+    FB.Event.subscribe('xfbml.render', () => {
+      this.fbLoaded = true
+    });
 
+    FB.XFBML.parse(this.el.nativeElement);
+  }
+
+  private get href() {
+    return location.href;
+  }
 }
