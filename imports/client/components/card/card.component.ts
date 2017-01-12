@@ -52,4 +52,6 @@ export class CardComponent extends AbstractComponent {
 
     this.sub(sub);
   }
+
+  login = UserService.login;
 }

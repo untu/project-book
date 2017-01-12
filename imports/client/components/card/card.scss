@@ -73,6 +73,18 @@ project-card {
       color: #F06292;
     }
   }
+
+  .login-btns .fa {
+    font-size: 3em;
+
+    &.fa-facebook-square {
+      color: #3B5998;
+    }
+
+    &.fa-google-plus-square {
+      color: #D64136;
+    }
+  }
 }
 
 .blink {

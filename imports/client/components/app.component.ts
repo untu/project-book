@@ -7,7 +7,7 @@ import {Tags, Tag} from "../../collections/tags.collection";
 import {ProjectService} from "../services/projects.service";
 import {UserService} from "../services/user.service";
 import template from "./app.html";
-import {User, Users} from "../../collections/users.collection";
+import {User} from "../../collections/users.collection";
 
 @Component({
   selector: 'app',
@@ -40,18 +40,7 @@ export class AppComponent {
     this._localStorage.set('isGridView', val);
   }
 
-  login(serviceName) {
-    switch (serviceName) {
-      case 'fb':
-        Meteor.loginWithFacebook({requestPermissions: ['public_profile, email']});
-        break;
-      case 'google':
-        Meteor.loginWithGoogle({requestPermissions: ['https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile']});
-        break;
-    }
-
-    return false;
-  }
+  login = UserService.login;
 
   logout() {
     Meteor.logout();

@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
-import {Observable, ReplaySubject} from "rxjs";
-import {Users, User} from "../../collections/users.collection";
+import {ReplaySubject} from "rxjs";
+import {User} from "../../collections/users.collection";
 import {MeteorObservable} from "meteor-rxjs";
 import * as _ from "lodash";
 
@@ -21,5 +21,18 @@ export class UserService {
 
         this.currentUser$.next(user);
       });
+  }
+
+  static login(serviceName) {
+    switch (serviceName) {
+      case 'fb':
+        Meteor.loginWithFacebook({requestPermissions: ['public_profile, email']});
+        break;
+      case 'google':
+        Meteor.loginWithGoogle({requestPermissions: ['https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile']});
+        break;
+    }
+
+    return false;
   }
 }
