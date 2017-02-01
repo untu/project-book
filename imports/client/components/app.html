@@ -33,17 +33,7 @@
                     [routerLinkActiveOptions]="{exact: true}">
                     <a>Добавить проект</a>
                 </li>
-                <li><p class="navbar-text">Теги:</p></li>
-                <li *ngFor="let tag of popularTags$ | async">
-                    <a class="tag" [routerLink]="['/search', '#' + tag.key]">#{{tag.key}}({{tag.count}})</a>
-                </li>
             </ul>
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input projectSearch type="text" class="form-control text-center"
-                           placeholder="Поиск проектов...">
-                </div>
-            </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a routerLink="/project/dy8gLFFgrTBJoJvo6">О проекте</a></li>
                 <li><a target="_blank" href="https://youtu.be/QyrEIFtJHuc">Видео презентация</a></li>
@@ -79,6 +69,19 @@
                     </ul>
                 </li>
             </ul>
+            <div class="clearfix"></div>
+            <ul class="nav navbar-nav">
+                <li><p class="navbar-text">Теги:</p></li>
+                <li *ngFor="let tag of popularTags$ | async">
+                    <a class="tag" [routerLink]="['/search', '#' + tag.key]">#{{tag.key}}({{tag.count}})</a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input projectSearch type="text" class="form-control text-center"
+                           placeholder="Поиск проектов...">
+                </div>
+            </form>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
