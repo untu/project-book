@@ -7,9 +7,9 @@
       <div class="row">
         <template ngFor let-project [ngForOf]="projects$ | async" let-i="index">
             <project-item [project]="project"
-                          [ngClass]="isGridView ? ['col-md-8', 'col-md-offset-2'] : ['col-md-3']"
+                          [ngClass]="isGridView ? ['col-md-8', 'col-md-offset-2'] : ['col-md-4']"
             ></project-item>
-            <div *ngIf="(i+1) % 4 == 0" class="clearfix"></div>
+            <div *ngIf="(i+1) % 3 == 0" class="clearfix"></div>
         </template>
       </div>
     </div>
