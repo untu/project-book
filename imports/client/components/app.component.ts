@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, ViewChild} from "@angular/core";
 import {Observable} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {MeteorObservable} from "meteor-rxjs";
@@ -18,6 +18,7 @@ export class AppComponent {
   private blinkLoginForm: boolean;
   private user$: Observable <User> = this.userService.currentUser$;
   private user: User;
+  @ViewChild('navbarToggle') navbarToggle;
 
   constructor(private projectService: ProjectService,
               private route: ActivatedRoute,
@@ -46,6 +47,13 @@ export class AppComponent {
     Meteor.logout();
 
     return false;
+  }
+
+  hideMenu() {
+    if (this.navbarToggle.nativeElement.offsetParent === null)
+      return;
+
+    this.navbarToggle.nativeElement.click();
   }
 
   private popularTags(): Observable <Tag[]> {
